@@ -4,19 +4,16 @@ import { publicRouter } from "../routes/public-api.js";
 import cookieParser from "cookie-parser";
 import { userRouter } from "../routes/api.js";
 import { tokenRouter } from "../routes/refreshToken-api.js";
-import passport from "passport";
-import ('../service/google-auth-service.js');
 
 export const web = express();
 
-web.use(passport.initialize());
 web.use(express.json());
 web.use(cookieParser());
 
 web.use(publicRouter);
 
-web.use(tokenRouter);
-
 web.use(userRouter);
+
+web.use(tokenRouter);
 
 web.use(errormiddleware);

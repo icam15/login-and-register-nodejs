@@ -57,9 +57,9 @@ const login = async(request) => {
         throw new ResponseError(404, "Username or Password is wrong");
     }
 
-    const isPasswordValid = await bcrypt.compare(login.password, findUser.password)
+    const PasswordValid = await bcrypt.compare(login.password, findUser.password)
 
-    if(!isPasswordValid) {
+    if(!PasswordValid) {
         throw new ResponseError(404, "Username or Password is wrong");
     }
 
@@ -89,9 +89,6 @@ const login = async(request) => {
             logger.info("Email sent", info.response);
         }
         });
-
-    
-    
 
     //Authorization using jwt
     const accessToken = jwt.sign(findUser, process.env.JWT_ACCESS_TOKEN, {
@@ -133,7 +130,8 @@ const get = async (email) => {
             email: emailUser
         },
         select: {
-            name :true
+            name :true,
+            id: true
         }
     });
 
