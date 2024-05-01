@@ -19,7 +19,7 @@ const login = async (req, res, next) => {
         const result = await userService.login(req.body);
         res.cookie("refreshToken", result.refreshToken, {
             httpOnly: true,
-            masAge: 24 * 60 * 60 * 1000
+            maxAge: 24 * 60 * 60 * 1000
         });
         res.status(200).json({
             accessToken : result.accessToken
@@ -31,7 +31,7 @@ const login = async (req, res, next) => {
 
 const get = async (req, res, next) => {
     try {
-        const result = await userService.get(req.user.email)
+        const result = await userService.get(req.user.email);
         res.status(200).json({
             data: result
         })

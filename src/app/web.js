@@ -10,11 +10,12 @@ export const web = express();
 web.use(express.json());
 web.use(cookieParser());
 
-
 web.use(publicRouter);
 
 web.use(tokenRouter);
 
 web.use(userRouter);
+
+
 
 web.use(errormiddleware);
