@@ -25,10 +25,8 @@ export const url = oauth2Client.generateAuthUrl({
 
 
 const loginGoogle = async (code) => {
-
     const {tokens} = await oauth2Client.getToken(code);
     oauth2Client.setCredentials(tokens);
-    console.log(tokens);
 
     const oauth2 = google.oauth2({
         auth: oauth2Client,
@@ -50,22 +48,21 @@ const loginGoogle = async (code) => {
             name: true
         }
     });
-
     
-
+    
     const jwtPayload = {
-        name: data.email,
-        name: data.name
+        name: data.name,
+        email: data.email
     };
-
+    
     const jwtAccessToken = jwt.sign(jwtPayload, process.env.JWT_ACCESS_TOKEN, {
         expiresIn:"60s"
     });
-
+    
     const jwtRefreshToken = jwt.sign(jwtPayload, process.env.JWT_REFRESH_TOKEN, {
         expiresIn: "1d"
     });
-
+    
     if(!addUserGoogle) {
         addUserGoogle = await prisma.user.create({
             data: {
@@ -82,8 +79,8 @@ const loginGoogle = async (code) => {
     }
     
 
-    return{
-        data: addUserGoogle,
+    return {
+        addUserGoogle,
         jwtAccessToken,
         jwtRefreshToken
     }

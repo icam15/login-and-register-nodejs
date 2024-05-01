@@ -17,8 +17,10 @@ const loginGoogleCallback = async (req, res, next) => {
             maxAge: 24 * 60 * 60 * 1000
         });
         res.status(200).json({
-            token: result.jwtAccessToken
-        })
+            data: result.addUserGoogle,
+            accessToken: result.jwtAccessToken
+        });
+        
     }catch (e) {
         next(e)
     }

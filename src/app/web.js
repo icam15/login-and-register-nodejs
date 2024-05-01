@@ -12,8 +12,10 @@ web.use(cookieParser());
 
 web.use(publicRouter);
 
+web.use(tokenRouter);
+
 web.use(userRouter);
 
-web.use(tokenRouter);
+
 
 web.use(errormiddleware);
