@@ -71,7 +71,7 @@ const login = async(request) => {
         secure: true,
         auth: {
             user: "bianskiza@gmail.com",
-            pass: "ssvs lpku jfkd kzgl"
+            pass: process.env.authEmail
         },
     })
 
